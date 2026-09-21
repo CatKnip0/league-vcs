@@ -1,54 +1,47 @@
 import json
+import struct
 
 from league_vcs.exceptions import UserInputException
 
 
 class ROFLParser:
-    """
-    Parse a .rofl replay and get its metadata.
-    """
-    byteorder = 'little'
-    length_fields_offset = 262
-    length_fields_bytesize = 26
-
-    @classmethod
-    def int_from_bytes(cls, buffer):
-        return int.from_bytes(buffer, byteorder=cls.byteorder, signed=False)
+    MAGIC = b'RIOT'
 
     def __init__(self, path):
-        self.file = open(path, 'rb')
         try:
-            self.length_fields = self.extract_length_fields()
-            self.metadata = self.extract_metadata()
-            self.version = self.metadata['gameVersion']
-        except BaseException:
+            with open(path, 'rb') as f:
+                magic = f.read(4)
+                if magic != self.MAGIC:
+                    raise ValueError('Not a ROFL file')
+
+                fmt_version = struct.unpack('<H', f.read(2))[0]
+
+                if fmt_version >= 2:
+                    self.version = self._parse_v2(f)
+                else:
+                    self.version = self._parse_v1(f)
+        except (UserInputException, Exception):
             raise UserInputException(f'Invalid replay file at {path}!')
-        self.file.close()
 
-    def read(self, offset, size):
-        self.file.seek(offset)
-        return self.file.read(size)
+    @staticmethod
+    def _parse_v2(f):
+        f.seek(0x0F)
+        ver = b''
+        for _ in range(64):
+            b = f.read(1)
+            if not b or b[0] < 0x20 or b[0] > 0x7e:
+                break
+            ver += b
+        if not ver:
+            raise ValueError('No version string found')
+        return ver.decode('ascii')
 
-    def extract_length_fields(self):
-        """
-        Get the length fields and offsets from the ROFL files.
-        """
-        buffer = self.read(self.length_fields_offset, self.length_fields_bytesize)
-        return {
-            'header_length': self.int_from_bytes(buffer[0:2]),
-            'file_length': self.int_from_bytes(buffer[2:6]),
-            'metadata_offset': self.int_from_bytes(buffer[6:10]),
-            'metadata_length': self.int_from_bytes(buffer[10:14]),
-            'payload_header_offset': self.int_from_bytes(buffer[14:18]),
-            'payload_header_length': self.int_from_bytes(buffer[18:22]),
-            'payload_offset': self.int_from_bytes(buffer[22:26]),
-        }
-
-    def extract_metadata(self):
-        """
-        Load the metadata from the replay.
-        """
-        metadata_bytes = self.read(self.length_fields['metadata_offset'],
-                                   self.length_fields['metadata_length'])
-
-        return json.loads(metadata_bytes)
+    @staticmethod
+    def _parse_v1(f):
+        f.seek(262)
+        buf = f.read(26)
+        metadata_offset = int.from_bytes(buf[6:10], byteorder='little', signed=False)
+        metadata_length = int.from_bytes(buf[10:14], byteorder='little', signed=False)
+        f.seek(metadata_offset)
+        metadata = json.loads(f.read(metadata_length))
+        return metadata['gameVersion']
