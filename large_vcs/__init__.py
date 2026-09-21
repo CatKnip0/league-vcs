@@ -28,8 +28,18 @@ def hash_file(fp):
 
 
 def save_to_repo(src, dst):
-    shutil.copyfile(src, dst)
-    os.chmod(dst, stat.S_IREAD)
+    if os.path.exists(dst):
+        return
+    tmp = dst + '.tmp'
+    try:
+        shutil.copyfile(src, tmp)
+        os.replace(tmp, dst)
+        os.chmod(dst, stat.S_IREAD)
+    except (PermissionError, FileExistsError):
+        try:
+            os.unlink(tmp)
+        except OSError:
+            pass
 
 
 def load_from_repo(src, dst):
