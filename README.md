@@ -1,15 +1,15 @@
 # League VCS
 
-- [Download League VCS](https://github.com/CatKnips/league-vcs/releases)
-- [Wiki Home](https://github.com/CatKnips/league-vcs/wiki)
-  - [Installation](https://github.com/CatKnips/league-vcs/wiki/Installation)
-  - [Usage](https://github.com/CatKnips/league-vcs/wiki/Usage)
-  - [FAQ](https://github.com/CatKnips/league-vcs/wiki/FAQ)
+- [Download League VCS](https://github.com/CatKnip0/league-vcs/releases)
+- [Wiki Home](https://github.com/CatKnip0/league-vcs/wiki)
+  - [Installation](https://github.com/CatKnip0/league-vcs/wiki/Installation)
+  - [Usage](https://github.com/CatKnip0/league-vcs/wiki/Usage)
+  - [FAQ](https://github.com/CatKnip0/league-vcs/wiki/FAQ)
 
 
 *A version control system for League of Legends.*
 
-![Main Screenshot](https://github.com/CatKnips/league-vcs/raw/master/images/patch-list.png)
+![Main Screenshot](https://github.com/CatKnip0/league-vcs/raw/master/images/patch-list.png)
 
 
 **NOTE:** Currently in beta. It *should* work but that doesn't mean it *will*.
@@ -26,11 +26,11 @@ League VCS only supports 64-bit Windows.
 
 Windows 10 and 11 are supported.
 
-Check out the [Wiki](https://github.com/CatKnips/league-vcs/wiki) for setup and usage instructions.
+Check out the [Wiki](https://github.com/CatKnip0/league-vcs/wiki) for setup and usage instructions.
 
 ---
 
-[Source](https://github.com/CatKnips/league-vcs) · [Releases](https://github.com/CatKnips/league-vcs/releases) · [Wiki Home](https://github.com/CatKnips/league-vcs/wiki) · [License](https://github.com/CatKnips/league-vcs/blob/master/LICENSE)
+[Source](https://github.com/CatKnip0/league-vcs) · [Releases](https://github.com/CatKnip0/league-vcs/releases) · [Wiki Home](https://github.com/CatKnip0/league-vcs/wiki) · [License](https://github.com/CatKnip0/league-vcs/blob/master/LICENSE)
 
 League VCS isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc.
 

@@ -4,7 +4,7 @@ setup(
     name='league-vcs',
     version='0.2.0',
     packages=find_packages(),
-    author='CatKnips',
+    author='CatKnip0',
     entry_points={
         'console_scripts': ['league-vcs=league_vcs.cli:main']
     },

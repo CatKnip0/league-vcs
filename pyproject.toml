@@ -10,7 +10,7 @@ readme = "README.md"
 license = "MIT"
 requires-python = ">=3.9"
 authors = [
-    { name = "CatKnips" },
+    { name = "CatKnip0" },
 ]
 dependencies = [
     "click>=8.0",
@@ -23,8 +23,8 @@ dependencies = [
 league-vcs = "league_vcs.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/CatKnips/league-vcs"
-Issues = "https://github.com/CatKnips/league-vcs/issues"
+Homepage = "https://github.com/CatKnip0/league-vcs"
+Issues = "https://github.com/CatKnip0/league-vcs/issues"
 
 [tool.setuptools.packages.find]
 include = ["league_vcs*", "large_vcs*"]
