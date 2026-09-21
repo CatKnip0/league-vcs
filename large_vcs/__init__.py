@@ -102,19 +102,11 @@ class LargeVCS:
         os.unlink(self.repo_path('current.json'))
 
     @classmethod
-    def init(cls, root):
-        repo = cls(root)
-        assert not os.path.exists(repo.repo_path()), f'Repo already exists at {repo.root}'
-        os.makedirs(repo.repo_path('files'), exist_ok=False)
-        os.makedirs(repo.repo_path('patches'), exist_ok=False)
-        return repo
-
-    @classmethod
     def load_or_create(cls, root):
-        try:
-            return cls.init(root)
-        except (AssertionError, Exception):
-            return cls(root)
+        repo = cls(root)
+        os.makedirs(repo.repo_path('files'), exist_ok=True)
+        os.makedirs(repo.repo_path('patches'), exist_ok=True)
+        return repo
 
     @staticmethod
     def _hash_file(params):
