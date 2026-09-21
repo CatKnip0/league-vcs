@@ -3,8 +3,11 @@ This is the long-running main entry point for the whole application. It runs at 
 system tray.
 """
 import datetime
+import multiprocessing
 import os
 import sys
+
+multiprocessing.freeze_support()
 
 from league_vcs.config import Config
 from league_vcs.gui import GUI
@@ -47,15 +50,15 @@ config = Config(config_path)
 print('Loaded config', config)
 
 if __name__ == '__main__':
-    if len(sys.argv) == 1:
+    replay_args = [a for a in sys.argv[1:] if not a.startswith('--')]
+    if not replay_args:
         gui = GUI(config)
         singleton = Singleton()
         if singleton.should_close():
-            # There's already another instance running.
             print('There is another already-running instance. Exiting now.')
             sys.exit(1)
 
         gui.start()
     else:
         gui = GUI(config)
-        gui.watch(sys.argv[1])
+        gui.watch(replay_args[0])
