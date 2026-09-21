@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "league-vcs"
+version = "0.2.0"
+description = "A version control system for League of Legends replays."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+authors = [
+    { name = "CatKnips" },
+]
+dependencies = [
+    "click>=8.0",
+    "pywin32>=306",
+    "wxPython>=4.2",
+    "tqdm>=4.60",
+]
+
+[project.scripts]
+league-vcs = "league_vcs.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/CatKnips/league-vcs"
+Issues = "https://github.com/CatKnips/league-vcs/issues"
+
+[tool.setuptools.packages.find]
+include = ["league_vcs*", "large_vcs*"]

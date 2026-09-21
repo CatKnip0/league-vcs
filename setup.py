@@ -1,13 +1,12 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='league-vcs',
-    version='0.1.0',
-    packages=['league_vcs', 'league_vcs.parsers', 'league_vcs.gui', 'league_vcs.gui.frames', 'league_vcs.gui.icons',
-              'league_vcs.gui.utils'],
-    author='Pranav Nutalapati',
+    version='0.2.0',
+    packages=find_packages(),
+    author='CatKnips',
     entry_points={
         'console_scripts': ['league-vcs=league_vcs.cli:main']
     },
-    install_requires=['click', 'pywin32', 'wxPython'],
+    install_requires=['click>=8.0', 'pywin32>=306', 'wxPython>=4.2', 'tqdm>=4.60'],
 )

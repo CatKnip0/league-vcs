@@ -1,4 +1,7 @@
 league_vcs/support/clients/*
+.idea/
+entrypoints/user_settings*.json
+entrypoints/test_out
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

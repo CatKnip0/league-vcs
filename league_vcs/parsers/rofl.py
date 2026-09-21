@@ -1,5 +1,4 @@
 import json
-import sys
 
 from league_vcs.exceptions import UserInputException
 
@@ -8,7 +7,7 @@ class ROFLParser:
     """
     Parse a .rofl replay and get its metadata.
     """
-    byteorder = sys.byteorder
+    byteorder = 'little'
     length_fields_offset = 262
     length_fields_bytesize = 26
 
